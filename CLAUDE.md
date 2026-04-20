@@ -58,7 +58,7 @@ Any new tool must mutate the VFS server-side **and** be mirrored in `handleToolC
 
 ### Auth & persistence
 - JWT cookie sessions via `jose` (`src/lib/auth.ts`); 7-day expiry, `httpOnly`.
-- `src/middleware.ts` gates `/api/projects` and `/api/filesystem` (no logged-in user → 401).
+- `src/middleware.ts` gates any route under `/api/projects` or `/api/filesystem` (no logged-in user → 401). Those route handlers don't currently exist — project CRUD and auth live in server actions under `src/actions/`. The only live API route is `/api/chat`, which is intentionally ungated so anonymous users can generate.
 - Anonymous users can use the app fully; their work lives in `sessionStorage` via `src/lib/anon-work-tracker.ts` and is migrated to a real `Project` row on sign-up/sign-in.
 - Prisma + SQLite (`prisma/schema.prisma`). The Prisma client is generated to `src/generated/prisma` (non-default location) — import `prisma` from `@/lib/prisma`, not from `@prisma/client` directly.
 
