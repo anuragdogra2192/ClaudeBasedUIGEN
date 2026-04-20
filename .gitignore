@@ -51,7 +51,7 @@ next-env.d.ts
 /prisma/dev.db-journal
 
 # local tool state
-/.claude/
+/.claude/settings.local.json
 /.playwright-mcp/
 /logs.txt
 
